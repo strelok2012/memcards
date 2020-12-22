@@ -10,7 +10,9 @@ const FIELD_SIZE = 4
 const initialState = {
   field: [],
   clicked: -1,
-  solvedIndexes: []
+  solvedIndexes: [],
+  freeze: false,
+  freezeTime: 2
 }
 
 export default new Vuex.Store({
@@ -41,6 +43,9 @@ export default new Vuex.Store({
     },
     PUSH_SOLVED (state, index) {
       state.solvedIndexes.push(index)
+    },
+    FREEZE (state, freeze) {
+      state.freeze = freeze
     }
   },
   actions: {

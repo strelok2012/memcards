@@ -16,12 +16,6 @@ import GameCard from '@/components/GameCard.vue'
 
 export default {
   name: 'Game',
-  data () {
-    return {
-      freeze: false,
-      freezeTime: 2
-    }
-  },
   computed: {
     field () {
       return this.$store.state.field
@@ -31,6 +25,12 @@ export default {
     },
     solved () {
       return this.$store.state.solvedIndexes
+    },
+    freeze () {
+      return this.$store.state.freeze
+    },
+    freezeTime () {
+      return this.$store.state.freezeTime
     }
   },
   components: {
@@ -43,12 +43,12 @@ export default {
     async clickNumber (number, index) {
       const res = await this.$store.dispatch('fieldClick', { number, index })
       if (res === -1) {
-        this.freeze = true
+        this.$store.commit('FREEZE', true)
         setTimeout(() => {
           this.$refs.cards[this.clicked].toBackdrop()
           this.$refs.cards[index].toBackdrop()
           this.$store.commit('SET_CLICKED', -1)
-          this.freeze = false
+          this.$store.commit('FREEZE', false)
         }, this.freezeTime * 1000)
       } else if (res === 1) {
         this.$store.commit('SET_CLICKED', -1)

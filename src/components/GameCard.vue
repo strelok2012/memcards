@@ -127,15 +127,8 @@ export default {
 }
 
 .card-backing {
-  position: absolute;
   background-image: url('../assets/card_back.png');
   background-size: cover;
-  z-index: 4;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  display: flex;
   transform: rotateY(180deg);
 }
 
